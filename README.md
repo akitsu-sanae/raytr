@@ -3,6 +3,7 @@
 Ray tracing implemented in Rust lang.  
 
 1. triangle ... rendering a simple triangle by ray tracing
+2. sphere ... rendering a simple sphere by ray tracing
 
 # Copyright
 
