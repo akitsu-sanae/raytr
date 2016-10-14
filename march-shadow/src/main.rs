@@ -56,7 +56,7 @@ fn main() {
         }
     }
 
-    let ref mut fout = File::create(&Path::new("test.png")).unwrap();
+    let ref mut fout = File::create(&Path::new("output.png")).unwrap();
     let _ = image::ImageRgb8(buf).save(fout, image::PNG);
 }
 
