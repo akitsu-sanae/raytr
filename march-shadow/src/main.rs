@@ -48,12 +48,14 @@ fn main() {
         if let Some(collision_pos) = ray.collision_pos(&obj) {
             let n = obj.normal(&collision_pos);
             let l = collision_pos - light.origin;
-            let i = -dot(&n, &l) * 255.0 / n.norm() / l.norm();
+            let cos = -dot(&n, &l) / n.norm() / l.norm();
+            let ld = cos * 255.0;
+            let ls = cos*cos * 255.0;
             *pixel = image::Rgb {
                 data: [
-                    0.0.max(i) as u8,
-                    0.0.max(i) as u8,
-                    0.0.max(i) as u8]
+                    255.0.min(0.0.max(ld+ls)) as u8,
+                    255.0.min(0.0.max(ld+ls)) as u8,
+                    255.0.min(0.0.max(ld+ls)) as u8]
             };
         }
     }
