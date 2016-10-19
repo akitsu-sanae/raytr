@@ -5,7 +5,7 @@
   file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
 ============================================================================*/
 
-use na::{Vector3, normalize};
+use na::Vector3;
 use objects::Object;
 
 const EPS: f32 = 0.01;
@@ -29,7 +29,7 @@ impl Object for Sphere {
         let dx = self.distance(&(p + dvx)) - self.distance(&(p - dvx));
         let dy = self.distance(&(p + dvy)) - self.distance(&(p - dvy));
         let dz = self.distance(&(p + dvz)) - self.distance(&(p - dvz));
-        normalize(&Vector3::new(dx, dy, dz))
+        Vector3::new(dx, dy, dz)
     }
 }
 
