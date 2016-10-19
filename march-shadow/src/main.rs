@@ -51,11 +51,12 @@ fn main() {
             let cos = -dot(&n, &l) / n.norm() / l.norm();
             let ld = cos * 255.0;
             let ls = cos*cos * 255.0;
+            let la = 64.0;
             *pixel = image::Rgb {
                 data: [
-                    255.0.min(0.0.max(ld+ls)) as u8,
-                    255.0.min(0.0.max(ld+ls)) as u8,
-                    255.0.min(0.0.max(ld+ls)) as u8]
+                    255.0.min(0.0.max(ld+ls+la)) as u8,
+                    255.0.min(0.0.max(ld+ls+la)) as u8,
+                    255.0.min(0.0.max(ld+ls+la)) as u8]
             };
         }
     }
