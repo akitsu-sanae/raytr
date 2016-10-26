@@ -6,6 +6,7 @@ Ray tracing implemented in Rust lang.
 2. sphere ... rendering a simple sphere by ray tracing
 3. ray-march ... rendering a simple sphere by ray marching
 4. march-shadow ... rendering a simple sphere with shade (Lambert, Phong) by ray marching
+5. multi-objects ... rendering two simple sphere with shade (Lambert, Phong) by ray marching
 
 # Copyright
 
