@@ -36,7 +36,7 @@ impl Ray {
 
     fn collision<'a>(&'a self, objs: &'a Vec<Box<Object> >) -> Option<(Vector3<f32>, &Box<Object>)> {
         let mut pos = self.origin.clone();
-        for _ in {0 .. 15} {
+        for _ in {0 .. 100} {
             let dis = objs.iter().map(|obj| obj.distance(&pos)).fold(0.0/0.0, |m, v| {
                 v.min(m)
             });

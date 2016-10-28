@@ -8,6 +8,7 @@
 use na::Vector3;
 
 pub mod sphere;
+pub mod board;
 
 pub trait Object {
     fn distance(&self, p: &Vector3<f32>) -> f32;

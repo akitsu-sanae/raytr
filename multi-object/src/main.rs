@@ -21,6 +21,7 @@ mod objects;
 mod ray;
 mod light;
 use objects::sphere::Sphere;
+use objects::board::Board;
 use objects::Object;
 use ray::Ray;
 use light::Light;
@@ -37,7 +38,8 @@ fn main() {
         center: Vector3::new(0.0, 0.5, 0.0),
         radius: 1.5,
     };
-    let objs = vec![sphere1, sphere2];
+    let board: Box<Board> = box Board::new();
+    let objs = vec![sphere1, sphere2, board];
     let light = Light {
         origin: Vector3::new(0.0, 0.0, -2.0),
     };
