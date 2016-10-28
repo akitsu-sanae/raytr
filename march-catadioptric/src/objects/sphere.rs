@@ -35,5 +35,9 @@ impl Object for Sphere {
     fn refractive_index(&self) -> f32 {
         1.4
     }
+
+    fn color(&self) -> Vector3<f32> {
+        Vector3::new(64.0, 64.0, 120.0)
+    }
 }
 

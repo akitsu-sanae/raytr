@@ -14,5 +14,6 @@ pub trait Object {
     fn distance(&self, p: &Vector3<f32>) -> f32;
     fn normal(&self, p: &Vector3<f32>) -> Vector3<f32>;
     fn refractive_index(&self) -> f32;
+    fn color(&self) -> Vector3<f32>;
 }
 

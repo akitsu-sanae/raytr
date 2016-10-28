@@ -19,16 +19,16 @@ pub struct Ray {
 }
 
 impl Ray {
-    pub fn color(&self, objs: &Vec<Box<Object> >, light: &Light, counter: i32) -> Option<f32> {
+    pub fn color(&self, objs: &Vec<Box<Object> >, light: &Light, counter: i32) -> Option<Vector3<f32> > {
         if let Some(collision) = self.collision(objs) {
             let (pos, obj) = collision;
             let n = (*obj).normal(&pos);
             let l = pos - light.origin;
             let cos = -dot(&n, &l) / n.norm() / l.norm();
-            let ld = cos * 255.0;
-            let ls = cos*cos*cos*cos*cos*cos*cos * 255.0;
-            let la = 64.0;
-            let mut nyan = 0.0;
+            let ld = cos;
+            let ls = cos*cos*cos*cos*cos*cos*cos;
+            let la = 0.1;
+            let mut result = obj.color() * (ld+ls+la);
             if counter > 0 {
                 let g = (obj.refractive_index()*obj.refractive_index() - cos*cos - 1.0).sqrt();
                 let t = Ray {
@@ -41,13 +41,13 @@ impl Ray {
                 };
                 let (t, r) = (t.color(objs, light, counter-1), (r.color(objs, light, counter-1)));
                 if let Some(color) = t {
-                    nyan += color * 0.1;
+                    result += color * 0.5;
                 };
                 if let Some(color) = r {
-                    nyan += color * 0.1;
+                    result += color * 0.5;
                 };
             }
-            Some(ld + ls + la + nyan)
+            Some(result)
         } else {
             None
         }

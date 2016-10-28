@@ -34,5 +34,9 @@ impl Object for Board {
     fn refractive_index(&self) -> f32 {
         1.4
     }
+
+    fn color(&self) -> Vector3<f32> {
+        Vector3::new(120.0, 64.0, 64.0)
+    }
 }
 

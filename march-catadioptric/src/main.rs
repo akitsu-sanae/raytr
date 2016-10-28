@@ -55,9 +55,9 @@ fn main() {
         if let Some(color) = ray.color(&objs, &light, 3) {
             *pixel = image::Rgb {
                 data: [
-                    255.0.min(0.0.max(color)) as u8,
-                    255.0.min(0.0.max(color)) as u8,
-                    255.0.min(0.0.max(color)) as u8]
+                    255.0.min(0.0.max(color.x)) as u8,
+                    255.0.min(0.0.max(color.y)) as u8,
+                    255.0.min(0.0.max(color.z)) as u8]
             };
         }
     }
