@@ -7,12 +7,18 @@
 
 int main() {
     auto mesh = Mesh::load_file("bunny.obj");
-    auto cache = Cache{mesh};
+
+    std::unique_ptr<Cache> cache = std::make_unique<CacheNode>(mesh.boundary_box());
+
+    for (auto const& face : mesh.faces)
+        cache->add(face, mesh);
+
     png::image<png::rgb_pixel> image{800, 800};
     auto scale = std::make_pair(4.0 / 800.0, 4.0 / 800.0);
     vector ray_origin {{
         0.0, 0.0, -0.1
     }};
+
     for (size_t y = 0; y < image.get_height(); ++y) {
         for (size_t x = 0; x < image.get_width(); ++x) {
             auto const ray = Ray {

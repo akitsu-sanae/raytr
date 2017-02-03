@@ -3,7 +3,11 @@
 #include <iostream>
 
 
-std::unique_ptr<Color> Ray::collision(Mesh const& mesh, Cache const&) const {
+std::unique_ptr<Color>
+Ray::collision(
+        Mesh const& mesh,
+        std::unique_ptr<Cache> const&) const
+{
     for (auto const& face : mesh.faces) {
         std::array<vector, 3> node_poss;
         for (size_t i=0; i<3; i++) {

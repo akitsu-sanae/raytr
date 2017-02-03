@@ -12,7 +12,7 @@ struct Ray {
     vector origin;
     vector direction;
 
-    std::unique_ptr<Color> collision(Mesh const& mesh, Cache const&) const;
+    std::unique_ptr<Color> collision(Mesh const& mesh, std::unique_ptr<Cache> const&) const;
 
     bool collision_impl(std::array<vector, 3> const&) const;
 };

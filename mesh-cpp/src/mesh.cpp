@@ -2,6 +2,7 @@
 #include <fstream>
 #include "utility.hpp"
 #include "mesh.hpp"
+#include "boundary_box.hpp"
 
 Mesh Mesh::load_file(const char* filename) {
     std::ifstream input{filename};
@@ -64,5 +65,30 @@ void Mesh::debug() const {
                     face.node_ids[2])
             << std::endl;
     }
+}
+
+BoundaryBox Mesh::boundary_box() const {
+    auto result = BoundaryBox {
+        {0.0, 0.0},
+        {0.0, 0.0},
+        {0.0, 0.0}
+    };
+    for (auto const& node : nodes) {
+        if (node.position[0] < result.x.min)
+            result.x.min = node.position[0];
+        if (result.x.max < node.position[0])
+            result.x.max = node.position[0];
+
+        if (node.position[1] < result.y.min)
+            result.y.min = node.position[1];
+        if (result.y.max < node.position[1])
+            result.y.max = node.position[1];
+
+        if (node.position[2] < result.z.min)
+            result.z.min = node.position[2];
+        if (result.z.max < node.position[2])
+            result.z.max = node.position[2];
+    }
+    return result;
 }
 
