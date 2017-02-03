@@ -1,11 +1,11 @@
 #ifndef MESH_NODE_HPP
 #define MESH_NODE_HPP
 
-#include <array>
+#include "matrix.hpp"
 
 struct Node {
     size_t id;
-    std::array<float, 3> position;
+    vector position;
 };
 
 #endif

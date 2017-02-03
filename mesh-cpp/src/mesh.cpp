@@ -14,7 +14,7 @@ Mesh Mesh::load_file(const char* filename) {
         if (data[0] == "v") {
             auto pos = util::range<std::string>{data, 1, data.size()}
                 .map([&](std::string const& s) {
-                        return std::stof(s);
+                        return std::stod(s);
                 })
                 .to_array<3>();
             auto node = Node {
@@ -26,7 +26,7 @@ Mesh Mesh::load_file(const char* filename) {
         if (data[0] == "f") {
             auto node_ids = util::range<std::string>{data, 1, data.size()}
                 .map([&](std::string const& s) {
-                        return std::stoul(s);
+                        return std::stoul(s) - 1;
                 })
                 .to_array<3>();
 

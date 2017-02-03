@@ -6,13 +6,15 @@
 #include "mesh.hpp"
 #include "cache.hpp"
 #include "color.hpp"
+#include "matrix.hpp"
 
 struct Ray {
-    std::array<float, 3> origin;
-    std::array<float, 3> direction;
-    std::unique_ptr<Color> collosion(Mesh const& mesh, Cache const& cache) const {
-        return std::make_unique<Color>(0, 0, 0);
-    }
+    vector origin;
+    vector direction;
+
+    std::unique_ptr<Color> collision(Mesh const& mesh, Cache const&) const;
+
+    bool collision_impl(std::array<vector, 3> const&) const;
 };
 
 #endif
