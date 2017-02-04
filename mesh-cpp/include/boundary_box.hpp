@@ -19,6 +19,7 @@ struct BoundaryBox {
     Range z;
 
     bool collision(Face const&, Mesh const&) const;
+    bool collision(Ray const&) const;
 };
 
 

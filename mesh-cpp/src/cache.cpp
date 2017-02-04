@@ -1,5 +1,6 @@
 #include "cache.hpp"
 #include "mesh.hpp"
+#include "ray.hpp"
 
 CacheNode::CacheNode(BoundaryBox const& boundary_box) :
     Cache(boundary_box)
@@ -39,6 +40,20 @@ void CacheNode::add(Face const& face, Mesh const& mesh) {
     }
 }
 
+std::vector<size_t> CacheNode::get(Ray const& ray) const {
+    if (!boundary_box.collision(ray))
+        return {};
+
+    std::vector<size_t> result{};
+    for (auto const& child : children) {
+        auto ids = child->get(ray);
+        result.insert(
+                std::end(result),
+                std::begin(ids), std::end(ids));
+    }
+    return result;
+}
+
 std::string CacheNode::debug() const {
     std::string result;
     result += "node {\n";
@@ -53,6 +68,12 @@ void CacheLeaf::add(Face const& face, Mesh const& mesh) {
     if (!boundary_box.collision(face, mesh))
         return;
     face_ids.push_back(face.id);
+}
+
+std::vector<size_t> CacheLeaf::get(Ray const& ray) const {
+    if (!boundary_box.collision(ray))
+        return {};
+    return face_ids;
 }
 
 std::unique_ptr<Cache> CacheLeaf::divide(Mesh const& mesh) const {

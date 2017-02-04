@@ -6,9 +6,11 @@
 std::unique_ptr<Color>
 Ray::collision(
         Mesh const& mesh,
-        std::unique_ptr<Cache> const&) const
+        std::unique_ptr<Cache> const& cache) const
 {
-    for (auto const& face : mesh.faces) {
+    auto face_ids = cache->get(*this);
+    for (auto const& face_id : face_ids) {
+        auto const& face = mesh.faces[face_id];
         std::array<vector, 3> node_poss;
         for (size_t i=0; i<3; i++) {
             auto node_id = face.node_ids[i];

@@ -8,6 +8,7 @@
 #include "face.hpp"
 
 struct Mesh;
+struct Ray;
 
 struct Cache {
     explicit Cache(BoundaryBox const& boundary_box) :
@@ -16,6 +17,7 @@ struct Cache {
     virtual ~Cache() {}
 
     virtual void add(Face const&, Mesh const&) = 0;
+    virtual std::vector<size_t> get(Ray const&) const = 0;
     virtual std::string debug() const = 0;
     BoundaryBox boundary_box;
 };
@@ -23,6 +25,7 @@ struct Cache {
 struct CacheNode : public Cache {
     explicit CacheNode(BoundaryBox const&);
     void add(Face const& face, Mesh const&) override;
+    std::vector<size_t> get(Ray const&) const override;
     std::string debug() const override;
     std::array<std::unique_ptr<Cache>, 8> children;
 };
@@ -30,6 +33,7 @@ struct CacheNode : public Cache {
 struct CacheLeaf : public Cache {
     using Cache::Cache;
     void add(Face const& face, Mesh const&) override;
+    std::vector<size_t> get(Ray const&) const override;
     std::string debug() const override;
     std::unique_ptr<Cache> divide(Mesh const&) const;
 
